@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from semantic_model import SemanticModel  # Ensure exact filename match
+from semantic_similarity import SemanticModel  # Ensure exact filename match
 import logging
 
 app = Flask(__name__)
