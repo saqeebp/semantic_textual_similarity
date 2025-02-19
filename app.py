@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from semantic_similarity import SemanticModel
+from semantic_model import SemanticModel
 import logging
 
 app = Flask(__name__)
@@ -7,7 +7,6 @@ model = SemanticModel()
 
 @app.route('/similarity', methods=['POST'])
 def get_similarity():
-    """API endpoint for similarity calculation"""
     try:
         data = request.get_json()
         
@@ -15,9 +14,7 @@ def get_similarity():
             return jsonify({"error": "Missing text1/text2"}), 400
         
         score = model.predict(data['text1'], data['text2'])
-        return jsonify({
-            "similarity score": round(score, 2)
-        })
+        return jsonify({"similarity score": round(score, 2)})
         
     except Exception as e:
         logging.error(f"Error: {str(e)}")
