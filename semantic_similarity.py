@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 class SemanticModel:
-    def __init__(self, data_path='your_dataset.csv'):
+    def __init__(self, data_path='dataneuron_text_similarity.csv'):
         self.df = pd.read_csv(data_path)
         self.vectorizer = TfidfVectorizer(stop_words='english')
         self._train()
