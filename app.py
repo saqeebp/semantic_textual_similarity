@@ -1,9 +1,15 @@
 # Part B: API Deployment
+import os
+import pandas as pd
 from flask import Flask, request, jsonify
 from semantic_model import SemanticModel
 
 app = Flask(__name__)
-model = SemanticModel()  # Model trained during initialization
+model = SemanticModel()
+
+@app.route('/')
+def home():
+    return "Semantic Similarity API - POST to /similarity with JSON body"
 
 @app.route('/similarity', methods=['POST'])
 def handle_request():
@@ -15,5 +21,5 @@ def handle_request():
         return jsonify({"error": str(e)}), 400
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8000))  # Get PORT from environment
-    app.run(host='0.0.0.0', port=port)        # Don't hardcode port
+    port = int(os.environ.get('PORT', 8000))
+    app.run(host='0.0.0.0', port=port)
