@@ -1,24 +1,18 @@
+# Part B: API Deployment
 from flask import Flask, request, jsonify
-from semantic_similarity import SemanticModel  # Ensure exact filename match
-import logging
+from semantic_model import SemanticModel
 
 app = Flask(__name__)
-model = SemanticModel()
+model = SemanticModel()  # Model trained during initialization
 
 @app.route('/similarity', methods=['POST'])
-def get_similarity():
+def handle_request():
     try:
         data = request.get_json()
-        
-        if not data or 'text1' not in data or 'text2' not in data:
-            return jsonify({"error": "Missing text1/text2"}), 400
-        
         score = model.predict(data['text1'], data['text2'])
         return jsonify({"similarity score": round(score, 2)})
-        
     except Exception as e:
-        logging.error(f"Error: {str(e)}")
-        return jsonify({"error": "Internal server error"}), 500
+        return jsonify({"error": str(e)}), 400
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    app.run(host='0.0.0.0', port=8000)
