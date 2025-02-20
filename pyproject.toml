@@ -1,0 +1,7 @@
+[build-system]
+requires = [
+    "setuptools<60.0",  # Required for scikit-learn 1.2.x
+    "wheel",
+    "Cython<3.0"  # Newer Cython versions cause issues
+]
+build-backend = "setuptools.build_meta"
