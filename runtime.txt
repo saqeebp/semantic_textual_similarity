@@ -1,1 +1,1 @@
-python-3.9.16
+python-3.10.13  # Verified compatible with scikit-learn 1.2.2
